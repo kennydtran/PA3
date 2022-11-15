@@ -13,28 +13,28 @@ struct TreeNode {
 class Solution {
 public:
     TreeNode* deleteNode(TreeNode* root, int key) {
-        if (root == NULL) { return NULL; }
-        if (root->val == key) { return rmv(root); }
-        TreeNode* r = root;
-        while (r != NULL) {
-            if (r->val > key) {
-                if (r->left != NULL && r->left->val == key) {
-                    r->left = rmv(r->left);
+        if (root == NULL) { return NULL; } //Base case to end recursion
+        if (root->val == key) { return rmv(root); } //If the value of root equals key, then remove root 
+        TreeNode* r = root; //Assign root to r for searching through key
+        while (r != NULL) { //Repeat searching with r until empty
+            if (r->val > key) { //If val is greater than key
+                if (r->left != NULL && r->left->val == key) { //If left side has a child and val equals key
+                    r->left = rmv(r->left); //Remove node on left side
                 }
-                else { r = r->left; }
+                else { r = r->left; } //If not, left node is assigned to r
             }
-            else {
-                if (r->right != NULL && r->right->val == key) {
-                    r->right = rmv(r->right);
+            else { //If r is less than key
+                if (r->right != NULL && r->right->val == key) { //If right side doesn't equal NULL and val equals key
+                    r->right = rmv(r->right); //Remove node on right side
                 }
-                else {
-                    r = r->right;
+                else { 
+                    r = r->right; //If not, right node is assigned to r
                 }
             }
         }
-        return root;
+        return root; //Return root
     }
-    TreeNode* rmv(TreeNode* node) {
+    TreeNode* rmv(TreeNode* node) {       
         if (node->left == NULL) { return node->right; }
         if (node->right == NULL) { return node->left; }
         TreeNode* rgt = node->right;
