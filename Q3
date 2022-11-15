@@ -34,16 +34,16 @@ public:
         }
         return root; //Return root
     }
-    TreeNode* rmv(TreeNode* node) {       
-        if (node->left == NULL) { return node->right; }
-        if (node->right == NULL) { return node->left; }
-        TreeNode* rgt = node->right;
-        TreeNode* lft = rgtmst(node->left);
-        lft->right = rgt;
-        return node->left;
+    TreeNode* rmv(TreeNode* node) {      
+        if (node->left == NULL) { return node->right; } //If left node has no child, return right node
+        if (node->right == NULL) { return node->left; } //If right node has no child, return left node
+        TreeNode* rgt = node->right; //Assign right node to rgt
+        TreeNode* lft = rgtmst(node->left); //Assign left node to lft
+        lft->right = rgt; //Assign rgt to right
+        return node->left; //Return left node
     }
     TreeNode* rgtmst(TreeNode* rt) {
-        if (rt->right == NULL) { return rt; }
-        return rgtmst(rt->right);
+        if (rt->right == NULL) { return rt; } //If right has no child
+        return rgtmst(rt->right); //Return 
     }
 };
